@@ -1,0 +1,152 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Georgia, serif;
+    background-color: #f5f6fa;
+}
+
+/* NAVBAR */
+.navbar {
+    background-color: #0A1C3A;
+    color: white;
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo-circle {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.logo-circle img {
+    width: 80%;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-home {
+    padding: 8px 20px;
+    border: 2px solid white;
+    background: transparent;
+    color: white;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.nav-home:hover {
+    background: white;
+    color: #0A1C3A;
+}
+
+.profile-icon {
+    width: 40px;
+    border-radius: 50%;
+}
+
+/* MAIN */
+.container {
+    padding: 50px;
+}
+
+/* ITEM SECTION */
+.item-section {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.item-image {
+    width: 300px;
+    height: 300px;
+    border: 3px solid #0A1C3A;
+}
+
+.item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.item-card {
+    flex: 1;
+    border: 3px solid #0A1C3A;
+    padding: 25px;
+}
+
+.section-title-box {
+    border: 3px solid #0A1C3A;
+    padding: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.item-card p {
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+/* CLAIMANT CARD */
+.claimant-card {
+    border: 3px solid #0A1C3A;
+    padding: 25px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #0A1C3A;
+    font-size: 16px;
+}
+
+/* BUTTON */
+.button-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 30px;
+}
+
+.primary-btn {
+    padding: 12px 40px;
+    font-size: 20px;
+    border: 3px solid #0A1C3A;
+    background: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.primary-btn:hover {
+    background-color: #0A1C3A;
+    color: white;
+}

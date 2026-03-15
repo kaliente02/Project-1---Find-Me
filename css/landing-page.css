@@ -1,0 +1,90 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f8;
+}
+
+/* NAVBAR */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 40px;
+    background: #0A1C3A;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.navbar-brand {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.navbar-account {
+    background: #007bff;
+    color: white;
+    padding: 10px 22px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* MAIN LAYOUT */
+.main-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 60px;
+    padding: 80px 60px;
+}
+
+/* LEFT PANEL */
+.left-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.logo {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: #ffffff;
+}
+
+/* SIGN IN BUTTON */
+.signin-btn {
+    background: #0A1C3A;;
+    color: white;
+    padding: 14px 38px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.signin-btn:hover {
+    background: #5083db;
+}
+
+/* RIGHT PANEL (BIG BOX) */
+.right-panel {
+    background: #a0d1e7;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+.right-panel h2 {
+    margin-bottom: 20px;
+    font-size: 22px;
+}
+
+.right-panel p {
+    color: #555;
+    line-height: 1.7;
+}

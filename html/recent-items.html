@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recent Item Details</title>
+    <link rel="stylesheet" href="../css/recent-items.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar">
+    <div class="logo-section">
+        <div class="logo-circle">
+            <img src="../assets/images/logo.jpg" alt="Logo">
+        </div>
+        <h1>FINDME</h1>
+    </div>
+</header>
+
+<div class="container">
+    <div class="item-card">
+
+        <div class="item-image">
+            <img id="itemImage" src="../assets/images/wallet.jpg" alt="Item Image">
+        </div>
+
+        <div class="item-details">
+
+            <div class="title-box">
+                <h2 id="itemName">Item Name</h2>
+            </div>
+
+            <table class="details-table">
+                <tr>
+                    <td>Category:</td>
+                    <td id="itemCategory"></td>
+                </tr>
+                <tr>
+                    <td>Description:</td>
+                    <td id="itemDescription"></td>
+                </tr>
+                <tr>
+                    <td>Date Reported:</td>
+                    <td id="itemDate"></td>
+                </tr>
+                <tr>
+                    <td>Location Found:</td>
+                    <td id="itemLocation"></td>
+                </tr>
+                <tr>
+                    <td>Status:</td>
+                    <td id="itemStatus"></td>
+                </tr>
+                <tr>
+                    <td>Item ID:</td>
+                    <td id="itemId"></td>
+                </tr>
+                <tr>
+                    <td>Reported By:</td>
+                    <td id="reportedBy"></td>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+
+    <!-- BUTTONS -->
+    <div class="button-group">
+        <button id="claimBtn" class="claim-btn">CLAIM ITEM</button>
+        <button id="homeBtn" class="home-btn">HOME</button>
+    </div>
+
+</div>
+
+<script src="../js/recent-items.js"></script>
+</body>
+</html>

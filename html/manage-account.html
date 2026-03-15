@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Account</title>
+    <link rel="stylesheet" href="../css/manage-account.css">
+</head>
+<body>
+
+<div class="account-container">
+
+    <h1>Account Settings</h1>
+
+    <div class="account-content">
+
+        <!-- LEFT: PROFILE IMAGE -->
+        <div class="profile-section">
+            <img id="profileImage" src="../assets/images/profile-1.jpg" alt="Profile Picture">
+            <button id="editProfileBtn">Edit Profile</button>
+            <input type="file" id="imageInput" accept="image/*" hidden>
+        </div>
+
+        <!-- RIGHT: ACCOUNT DETAILS -->
+        <div class="details-section">
+
+            <div class="field">
+                <label>Full Name</label>
+                <input type="text" id="fullName">
+            </div>
+
+            <div class="field">
+                <label>Role</label>
+                <input type="text" id="role" disabled>
+            </div>
+
+            <div class="field">
+                <label>Email</label>
+                <input type="email" id="email">
+            </div>
+
+            <div class="field">
+                <label>ID Number</label>
+                <input type="text" id="idNumber">
+            </div>
+
+            <div class="field">
+                <label>Contact Number</label>
+                <input type="text" id="contactNumber">
+            </div>
+
+            <div class="field password-field">
+                <label>Password</label>
+                <button id="changePasswordBtn">Change Password</button>
+            </div>
+
+        </div>
+    </div>
+
+    <button id="logoutBtn" class="logout-btn">Log Out</button>
+
+</div>
+
+<script src="../js/manage-account.js"></script>
+</body>
+</html>

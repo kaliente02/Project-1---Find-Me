@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FINDME | Additional Details</title>
+    <link rel="stylesheet" href="../css/report-lost-2.css">
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo">
+        <img src="../assets/images/logo.jpg" alt="FINDME">
+        <span>FINDME</span>
+    </div>
+
+    <h2>REPORT LOST ITEM</h2>
+
+    <div class="nav-actions">
+        <button id="homeBtn">Home</button>
+        <span class="icon">🔔</span>
+        <span class="icon">👤</span>
+    </div>
+</header>
+
+<main class="container">
+
+    <!-- CURRENT ITEM STATUS -->
+    <section class="card">
+        <h3>Current Item Status</h3>
+
+        <label for="turnedInTo">Item Turned In To:</label>
+        <input type="text" id="turnedInTo" placeholder="e.g. Security Office">
+    </section>
+
+    <!-- UPLOAD IMAGE -->
+    <section class="card">
+        <h3>Upload Image</h3>
+
+        <label for="imageUpload">Upload Image:</label>
+        <input type="file" id="imageUpload" accept="image/*">
+    </section>
+
+    <button class="primary-btn" id="submitBtn">
+        SUBMIT FOUND ITEM REPORT
+    </button>
+
+</main>
+
+<script src="../js/report-found-2.js"></script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+* {
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    margin: 0;
+    background-color: #f4f6f8;
+}
+
+/* NAVBAR */
+.navbar {
+    background: #0a1f44;
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar a {
+    color: white;
+    margin-left: 20px;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+/* MAIN CONTAINER */
+.container {
+    padding: 40px 30px;
+}
+
+/* ACTIVITY BUTTONS (VERTICAL) */
+.activity-buttons {
+    display: flex;
+    flex-direction: column;     /* vertical */
+    gap: 14px;
+    width: 280px;               /* sidebar-like width */
+}
+
+/* BUTTON STYLE */
+.activity-buttons button {
+    padding: 14px 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: #e8eef8;
+    color: #0a1f44;
+    font-size: 15px;
+    font-weight: 600;
+    text-align: left;           /* professional sidebar look */
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+/* HOVER */
+.activity-buttons button:hover {
+    background-color: #cfdaf0;
+}
+
+/* ACTIVE BUTTON */
+.activity-buttons button.active {
+    background-color: #1f4fd8;
+    color: #ffffff;
+}

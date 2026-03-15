@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FINDME | Report Found Item</title>
+    <link rel="stylesheet" href="../css/report-lost.css">
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo">
+        <img src="../assets/images/logo.jpg" alt="FINDME">
+        <span>FINDME</span>
+    </div>
+
+    <h2>REPORT LOST ITEM</h2>
+
+    <div class="nav-actions">
+        <button id="homeBtn">Home</button>
+        <span class="icon">🔔</span>
+        <span class="icon">👤</span>
+    </div>
+</header>
+
+<main class="container">
+
+    <!-- ITEM INFORMATION -->
+    <section class="card">
+        <h3>Item Information</h3>
+
+        <label for="itemName">Item Name:</label>
+        <input type="text" id="itemName">
+
+        <label for="category">Category:</label>
+        <select id="category">
+            <option value="">Select Category</option>
+            <option>Electronics</option>
+            <option>Documents</option>
+            <option>Clothing</option>
+            <option>Accessories</option>
+            <option>Others</option>
+        </select>
+
+        <label for="description">Description:</label>
+        <textarea id="description"></textarea>
+    </section>
+
+    <!-- LOSS DETAILS -->
+    <section class="card">
+        <h3>Loss Details</h3>
+
+        <label for="foundDate">Date Item was Found:</label>
+        <input type="date" id="foundDate">
+
+        <label for="foundLocation">Location Found:</label>
+        <input type="text" id="foundLocation">
+    </section>
+
+    <button class="primary-btn" id="proceedBtn">Proceed</button>
+
+</main>
+
+<script src="../js/report-found.js"></script>
+</body>
+</html>

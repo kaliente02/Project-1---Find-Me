@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FINDME | Claim Item – Proof</title>
+    <link rel="stylesheet" href="../css/claim-item-2.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar">
+    <div class="logo-section">
+        <div class="logo-circle">
+            <img src="../assets/images/logo.jpg" alt="Logo">
+        </div>
+        <h1>FINDME</h1>
+    </div>
+
+    <div class="nav-right">
+        <button id="homeNavBtn" class="nav-home">Home</button>
+        <span class="notification">🔔</span>
+        <img src="../assets/images/profile.jpg" class="profile-icon">
+    </div>
+</header>
+
+<main class="container">
+
+    <!-- PROOF OF OWNERSHIP -->
+    <section class="card">
+        <div class="section-title-box">
+            <h3>Proof of Ownership</h3>
+        </div>
+
+        <label for="itemDescription">Describe the Item in Detail:</label>
+        <textarea id="itemDescription" placeholder="Provide unique details that prove ownership..."></textarea>
+
+        <label for="proofUpload">Upload Proof:</label>
+        <input type="file" id="proofUpload" accept="image/*,application/pdf">
+    </section>
+
+    <!-- ADDITIONAL INFORMATION -->
+    <section class="card">
+        <div class="section-title-box">
+            <h3>Additional Information</h3>
+        </div>
+
+        <label for="lostDate">Date Item was Lost:</label>
+        <input type="date" id="lostDate">
+
+        <label for="lastLocation">Last Known Location:</label>
+        <input type="text" id="lastLocation">
+    </section>
+
+    <div class="button-wrapper">
+        <button class="primary-btn" id="submitBtn">
+            SUBMIT CLAIM REQUEST
+        </button>
+    </div>
+
+    <p class="note">
+        <strong>Note:</strong> Claims are subject to admin verification.
+    </p>
+
+</main>
+
+<script src="../js/claim-item-2.js"></script>
+</body>
+</html>

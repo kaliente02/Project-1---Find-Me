@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FINDME | Recent Claims</title>
+    <link rel="stylesheet" href="../css/recent-claim.css">
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo-section">
+        <div class="logo-circle">
+            <img src="../assets/images/logo.jpg" alt="Logo">
+        </div>
+        <h1 class="logo-text">FINDME</h1>
+    </div>
+
+    <div class="nav-icons">
+        <span class="notification">🔔</span>
+        <img src="../assets/images/profile.jpg" class="profile-icon" id="profileBtn">
+    </div>
+</header>
+
+<div class="main-container">
+
+    <div class="action-row">
+        <div class="left-actions">
+            <button id="reportLostBtn" class="primary-btn">Report Lost Item</button>
+            <button id="reportFoundBtn" class="primary-btn">Report Found Item</button>
+        </div>
+
+        <div class="search-filter">
+            <input type="text" id="searchInput" placeholder="Search claims">
+            <button id="filterBtn">Filter</button>
+        </div>
+    </div>
+
+    <h2 class="section-title">Recent Claim Requests</h2>
+
+    <div id="itemsContainer"></div>
+
+</div>
+
+<script src="../js/recent-claim.js"></script>
+</body>
+</html>

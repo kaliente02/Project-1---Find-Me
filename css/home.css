@@ -1,0 +1,164 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Georgia', serif;
+    background-color: #f4f6fb;
+}
+
+/* NAVBAR */
+.navbar {
+    background-color: #0A1C3A;
+    color: white;
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo-circle {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.logo-circle img {
+    width: 80%;
+}
+
+.logo-text {
+    font-size: 26px;
+    letter-spacing: 2px;
+}
+
+.nav-icons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.profile-icon {
+    width: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* MAIN */
+.main-container {
+    padding: 40px;
+}
+
+/* ACTION ROW */
+.action-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.left-actions {
+    display: flex;
+    gap: 15px; /* Buttons closer together */
+}
+
+.primary-btn {
+    padding: 10px 22px;
+    font-size: 17px;
+    border: 2px solid #0A1C3A;
+    background: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.primary-btn:hover {
+    background-color: #0A1C3A;
+    color: white;
+}
+
+/* SEARCH */
+.search-filter {
+    display: flex;
+    gap: 10px;
+}
+
+#searchInput {
+    padding: 10px;
+    width: 280px;
+    border: 2px solid #0A1C3A;
+}
+
+#filterBtn {
+    padding: 10px 18px;
+    border: 2px solid #0A1C3A;
+    background: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#filterBtn:hover {
+    background-color: #0A1C3A;
+    color: white;
+}
+
+/* TITLE */
+.section-title {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #0A1C3A;
+}
+
+/* CARDS */
+.item-card {
+    display: flex;
+    border: 2px solid #0A1C3A;
+    margin-bottom: 25px;
+    padding: 20px;
+    background: white;
+}
+
+.item-image {
+    width: 250px;
+    height: 180px;
+    margin-right: 30px;
+}
+
+.item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: 2px solid #0A1C3A;
+}
+
+.item-details {
+    flex: 1;
+    font-size: 19px;
+    line-height: 1.8;
+}
+
+.details-btn {
+    margin-top: 15px;
+    padding: 8px 18px;
+    border: 2px solid #0A1C3A;
+    background: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.details-btn:hover {
+    background-color: #0A1C3A;
+    color: white;
+}

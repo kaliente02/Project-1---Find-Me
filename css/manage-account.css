@@ -1,0 +1,122 @@
+* {
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    margin: 0;
+    background: #f4f6f8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.account-container {
+    background: white;
+    width: 900px;
+    padding: 40px;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.account-container h1 {
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.account-content {
+    display: flex;
+    gap: 40px;
+}
+
+/* LEFT */
+.profile-section {
+    width: 250px;
+    text-align: center;
+}
+
+.profile-section img {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+.profile-section button {
+    width: 100%;
+    padding: 10px;
+    background: #1e88e5;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.profile-section button:hover {
+    background: #1565c0;
+}
+
+/* RIGHT */
+.details-section {
+    flex: 1;
+}
+
+.field {
+    margin-bottom: 18px;
+}
+
+.field label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+    color: #444;
+}
+
+.field input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.field input:disabled {
+    background: #eee;
+}
+
+.password-field {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.password-field button {
+    padding: 8px 14px;
+    background: #1e88e5;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.password-field button:hover {
+    background: #1565c0;
+}
+
+/* LOGOUT */
+.logout-btn {
+    margin-top: 30px;
+    width: 100%;
+    padding: 14px;
+    background: #e53935;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.logout-btn:hover {
+    background: #c62828;
+}

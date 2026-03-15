@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FINDME | Claim Item</title>
+    <link rel="stylesheet" href="../css/claim-item-1.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar">
+    <div class="logo-section">
+        <div class="logo-circle">
+            <img src="../assets/images/logo.jpg" alt="Logo">
+        </div>
+        <h1>FINDME</h1>
+    </div>
+
+    <div class="nav-right">
+        <button id="homeNavBtn" class="nav-home">Home</button>
+        <span class="notification">🔔</span>
+        <img src="../assets/images/profile.jpg" class="profile-icon">
+    </div>
+</header>
+
+<main class="container">
+
+    <!-- ITEM BEING CLAIMED -->
+    <section class="item-section">
+
+        <div class="item-image">
+            <img id="itemImage" src="../assets/images/wallet.jpg" alt="Item">
+        </div>
+
+        <div class="item-card">
+            <div class="section-title-box">
+                <h3>Item Being Claimed:</h3>
+            </div>
+
+            <p><strong>Item Name:</strong> <span id="itemName"></span></p>
+            <p><strong>Item ID:</strong> <span id="itemId"></span></p>
+            <p><strong>Status:</strong> <span id="itemStatus"></span></p>
+        </div>
+
+    </section>
+
+    <!-- CLAIMANT INFORMATION -->
+    <section class="claimant-card">
+        <div class="section-title-box">
+            <h3>Claimant Information:</h3>
+        </div>
+
+        <div class="form-group">
+            <label>Full Name:</label>
+            <input type="text" id="fullName">
+        </div>
+
+        <div class="form-group">
+            <label>ID Number:</label>
+            <input type="text" id="idNumber">
+        </div>
+
+        <div class="form-group">
+            <label>Email Address:</label>
+            <input type="email" id="email">
+        </div>
+
+        <div class="form-group">
+            <label>Contact Number:</label>
+            <input type="text" id="contact">
+        </div>
+    </section>
+
+    <div class="button-wrapper">
+        <button id="proceedBtn" class="primary-btn">Proceed</button>
+    </div>
+
+</main>
+
+<script src="../js/claim-item-1.js"></script>
+</body>
+</html>

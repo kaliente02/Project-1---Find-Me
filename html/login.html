@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Log In</title>
+    <link rel="stylesheet" href="../css/signup.css">
+
+    <!-- Firebase initialization -->
+    <script type="module" src="register.js" defer></script>
+
+    <!-- Login JS as a module -->
+    <script type="module" src="../js/login.js" defer></script>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Log In</h2>
+        <label for="loginEmail">Email</label>
+        <input type="email" id="loginEmail" placeholder="Enter your email">
+
+        <label for="loginPassword">Password</label>
+        <input type="password" id="loginPassword" placeholder="Enter password">
+
+        <button id="loginBtn">Log In</button>
+        <p id="loginMsg" class="message"></p>
+        <p class="switch-link">Don't have an account? <a href="signup.html">Sign Up</a></p>
+    </div>
+</body>
+</html>

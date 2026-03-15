@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FINDME | Report Lost Item</title>
+    <link rel="stylesheet" href="../css/report-lost.css">
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo">
+        <img src="../assets/images/logo.jpg" alt="FINDME">
+        <span>FINDME</span>
+    </div>
+
+    <h2>REPORT LOST ITEM</h2>
+
+    <div class="nav-actions">
+        <button id="homeBtn">Home</button>
+        <span class="icon">🔔</span>
+        <span class="icon">👤</span>
+    </div>
+</header>
+
+<main class="container">
+
+    <!-- STEP 1 -->
+    <section class="card">
+        <h3>Item Information</h3>
+
+        <label>Item Name:</label>
+        <input type="text" id="itemName">
+
+        <label>Category:</label>
+        <select id="category">
+            <option value="">Select Category</option>
+            <option>Electronics</option>
+            <option>Documents</option>
+            <option>Clothing</option>
+            <option>Others</option>
+        </select>
+
+        <label>Description:</label>
+        <textarea id="description"></textarea>
+    </section>
+
+    <section class="card">
+        <h3>Loss Details</h3>
+
+        <label>Date Item was Lost:</label>
+        <input type="date" id="lostDate">
+
+        <label>Last Known Location:</label>
+        <input type="text" id="location">
+    </section>
+
+    <button class="primary-btn" id="proceedBtn">Proceed</button>
+
+    <!-- STEP 2 -->
+    <section class="card hidden" id="additionalSection">
+        <h3>Additional Details</h3>
+
+        <label>Distinguishing Features:</label>
+        <textarea id="features"></textarea>
+
+        <label>Upload Image:</label>
+        <input type="file" id="imageUpload">
+    </section>
+
+    <button class="primary-btn hidden" id="submitBtn">
+        SUBMIT LOST ITEM REPORT
+    </button>
+
+</main>
+
+<script src="../js/report-lost.js"></script>
+</body>
+</html>
