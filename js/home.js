@@ -7,16 +7,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const searchInput = document.getElementById("searchInput");
     const itemsContainer = document.getElementById("itemsContainer");
 
-    // API URLs
     const LOST_URL = "https://script.google.com/macros/s/AKfycbwlDsBZv9NJFS4DvFEqioEyTvUMLmH2ckjjLVJUhIOpja8bC9X4qt6lifsQXFAVL8fK/exec";
     const FOUND_URL = "https://script.google.com/macros/s/AKfycbzo2DgJ47oOdRGzOMBZCNt0wPn1jsdUTvdM2nJ5y6sd-7FXSzwPmvUJfbmdtPNG-PAIqQ/exec";
 
-    // Redirect Buttons
     reportLostBtn.addEventListener("click", () => window.location.href = "report-lost-1.html");
     reportFoundBtn.addEventListener("click", () => window.location.href = "report-found.html");
     profileBtn.addEventListener("click", () => window.location.href = "profile.html");
 
-    // Helper to fetch items and tag type
     async function fetchItems(url, type) {
         const response = await fetch(url);
         const data = await response.json();
@@ -25,13 +22,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     async function loadItems() {
         try {
-            // Fetch Lost and Found items
             const [lostItems, foundItems] = await Promise.all([
                 fetchItems(LOST_URL, "lost"),
                 fetchItems(FOUND_URL, "found")
             ]);
 
-            // Combine and sort by dateReported descending
             const allItems = [...lostItems, ...foundItems];
             allItems.sort((a, b) => new Date(b.dateReported) - new Date(a.dateReported));
 
@@ -59,7 +54,18 @@ document.addEventListener("DOMContentLoaded", () => {
                 `;
 
                 card.querySelector(".details-btn").addEventListener("click", () => {
-                    window.location.href = "recent-items.html"; // per-item details page
+                    const params = new URLSearchParams({
+                        itemName:     item.itemName     || '',
+                        category:     item.category     || '',
+                        description:  item.description  || '',
+                        dateReported: item.dateReported || '',
+                        location:     item.location     || '',
+                        status:       item.type         || '',
+                        itemId:       item.itemId       || '',
+                        reportedBy:   item.reportedBy   || '',
+                        imageUrl:     item.imageUrl     || ''
+                    });
+                    window.location.href = `recent-items.html?${params.toString()}`;
                 });
 
                 itemsContainer.appendChild(card);
@@ -73,7 +79,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     loadItems();
 
-    // Search functionality
     searchInput.addEventListener("keyup", () => {
         const value = searchInput.value.toLowerCase();
         const cards = document.querySelectorAll(".item-card");
@@ -83,7 +88,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Filter button placeholder
     filterBtn.addEventListener("click", () => alert("Filter function coming soon."));
 
 });

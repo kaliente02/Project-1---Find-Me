@@ -1,21 +1,47 @@
 document.addEventListener("DOMContentLoaded", () => {
 
     const claimBtn = document.getElementById("claimBtn");
-    const homeBtn = document.getElementById("homeBtn");
+    const homeBtn  = document.getElementById("homeBtn");
 
-    // TEMPORARY DATA (replace later with Google Sheets data)
-    document.getElementById("itemName").textContent = "Pink Wallet";
-    document.getElementById("itemCategory").textContent = "Accessories";
-    document.getElementById("itemDescription").textContent = "Leather wallet with multiple cards inside.";
-    document.getElementById("itemDate").textContent = "02/01/2026";
-    document.getElementById("itemLocation").textContent = "University Lobby";
-    document.getElementById("itemStatus").textContent = "Found";
-    document.getElementById("itemId").textContent = "ITM-2026-001";
-    document.getElementById("reportedBy").textContent = "Admin";
+    // Read ALL item data from URL query parameters
+    const params = new URLSearchParams(window.location.search);
 
-    // BUTTON ACTIONS
+    const itemName    = params.get("itemName")    || "Unknown Item";
+    const category    = params.get("category")    || "—";
+    const description = params.get("description") || "—";
+    const dateReported= params.get("dateReported")|| "—";
+    const location    = params.get("location")    || "—";
+    const status      = params.get("status")      || "—";
+    const itemId      = params.get("itemId")      || "—";
+    const reportedBy  = params.get("reportedBy")  || "—";
+    const imageUrl    = params.get("imageUrl")    || "";
+
+    // Populate the page
+    document.getElementById("itemName").textContent        = itemName;
+    document.getElementById("itemCategory").textContent    = category;
+    document.getElementById("itemDescription").textContent = description;
+    document.getElementById("itemDate").textContent        = dateReported;
+    document.getElementById("itemLocation").textContent    = location;
+    document.getElementById("itemStatus").textContent      = status.toUpperCase();
+    document.getElementById("itemId").textContent          = itemId;
+    document.getElementById("reportedBy").textContent      = reportedBy;
+
+    // Only set image if URL exists
+    const itemImage = document.getElementById("itemImage");
+    if (imageUrl) {
+        itemImage.src = imageUrl;
+        itemImage.alt = itemName;
+    }
+
+    // Pass ALL item data to claim-item-1.html (including imageUrl)
     claimBtn.addEventListener("click", () => {
-        window.location.href = "claim-item-1.html";
+        const claimParams = new URLSearchParams({
+            itemName,
+            itemId,
+            status,
+            imageUrl
+        });
+        window.location.href = `claim-item-1.html?${claimParams.toString()}`;
     });
 
     homeBtn.addEventListener("click", () => {

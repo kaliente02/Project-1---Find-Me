@@ -29,7 +29,8 @@
     <section class="item-section">
 
         <div class="item-image">
-            <img id="itemImage" src="../assets/images/wallet.jpg" alt="Item">
+            <!-- src and alt will be set dynamically by claim-item-1.js -->
+            <img id="itemImage" src="" alt="Item Image" style="display:none">
         </div>
 
         <div class="item-card">
@@ -37,6 +38,7 @@
                 <h3>Item Being Claimed:</h3>
             </div>
 
+            <!-- Values will be filled in by claim-item-1.js from URL params -->
             <p><strong>Item Name:</strong> <span id="itemName"></span></p>
             <p><strong>Item ID:</strong> <span id="itemId"></span></p>
             <p><strong>Status:</strong> <span id="itemStatus"></span></p>
@@ -52,22 +54,22 @@
 
         <div class="form-group">
             <label>Full Name:</label>
-            <input type="text" id="fullName">
+            <input type="text" id="fullName" placeholder="Enter your full name">
         </div>
 
         <div class="form-group">
             <label>ID Number:</label>
-            <input type="text" id="idNumber">
+            <input type="text" id="idNumber" placeholder="Enter your ID number">
         </div>
 
         <div class="form-group">
             <label>Email Address:</label>
-            <input type="email" id="email">
+            <input type="email" id="email" placeholder="Enter your email address">
         </div>
 
         <div class="form-group">
             <label>Contact Number:</label>
-            <input type="text" id="contact">
+            <input type="text" id="contact" placeholder="Enter your contact number">
         </div>
     </section>
 
