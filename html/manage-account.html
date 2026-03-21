@@ -2,62 +2,74 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Manage Account</title>
+    <title>Account Settings</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/manage-account.css">
 </head>
 <body>
 
 <div class="account-container">
-
-    <h1>Account Settings</h1>
+    <h1>Account <span>Settings</span></h1>
 
     <div class="account-content">
 
         <!-- LEFT: PROFILE IMAGE -->
         <div class="profile-section">
-            <img id="profileImage" src="../assets/images/profile-1.jpg" alt="Profile Picture">
-            <button id="editProfileBtn">Edit Profile</button>
+            <div class="avatar-wrapper" onclick="document.getElementById('imageInput').click()">
+                <img id="profileImage" src="https://ui-avatars.com/api/?name=Juan+Dela+Cruz&background=2563eb&color=fff&size=160" alt="Profile Picture">
+                <div class="avatar-overlay">Change</div>
+            </div>
             <input type="file" id="imageInput" accept="image/*" hidden>
+            <p class="profile-name" id="displayName">Edit Name</p>
+            <span class="profile-role-badge" id="displayRole">User</span>
+            <button id="editProfileBtn">Edit Profile</button>
         </div>
+
+        <!-- VERTICAL DIVIDER -->
+        <div class="divider"></div>
 
         <!-- RIGHT: ACCOUNT DETAILS -->
         <div class="details-section">
+            <div class="fields-grid">
 
-            <div class="field">
-                <label>Full Name</label>
-                <input type="text" id="fullName">
+                <div class="field">
+                    <label>Full Name</label>
+                    <input type="text" id="fullName">
+                </div>
+
+                <div class="field">
+                    <label>Role</label>
+                    <input type="text" id="role" disabled>
+                </div>
+
+                <div class="field">
+                    <label>Email Address</label>
+                    <input type="email" id="email">
+                </div>
+
+                <div class="field">
+                    <label>ID Number</label>
+                    <input type="text" id="idNumber">
+                </div>
+
+                <div class="field full-width">
+                    <label>Contact Number</label>
+                    <input type="text" id="contactNumber">
+                </div>
+
+                <div class="field full-width">
+                    <label>Password</label>
+                    <div class="password-row">
+                        <span>••••••••••</span>
+                        <button id="changePasswordBtn">Change Password</button>
+                    </div>
+                </div>
+
             </div>
-
-            <div class="field">
-                <label>Role</label>
-                <input type="text" id="role" disabled>
-            </div>
-
-            <div class="field">
-                <label>Email</label>
-                <input type="email" id="email">
-            </div>
-
-            <div class="field">
-                <label>ID Number</label>
-                <input type="text" id="idNumber">
-            </div>
-
-            <div class="field">
-                <label>Contact Number</label>
-                <input type="text" id="contactNumber">
-            </div>
-
-            <div class="field password-field">
-                <label>Password</label>
-                <button id="changePasswordBtn">Change Password</button>
-            </div>
-
         </div>
     </div>
 
     <button id="logoutBtn" class="logout-btn">Log Out</button>
-
 </div>
 
 <script src="../js/manage-account.js"></script>
