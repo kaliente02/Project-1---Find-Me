@@ -17,21 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
     profileBtn.addEventListener("click", () => window.location.href = "profile.html");
     printBtn.addEventListener("click", () => window.print());
 
-    // ✅ VALIDATION FUNCTION (ONLY COMPLETE DATA)
-    function isValidItem(item) {
-        return (
-            item.itemName &&
-            item.category &&
-            item.description &&
-            item.dateReported &&
-            item.location &&
-            item.reportedBy &&
-            item.itemId &&
-            item.imageUrl
-        );
-    }
-
-    // FETCH DATA
+    // FETCH ITEMS
     async function fetchItems(url, type) {
         const response = await fetch(url);
         const data = await response.json();
@@ -45,34 +31,38 @@ document.addEventListener("DOMContentLoaded", () => {
                 fetchItems(FOUND_URL, "found")
             ]);
 
-            let allItems = [...lostItems, ...foundItems];
-
-            // ✅ FILTER: REMOVE INCOMPLETE DATA
-            allItems = allItems.filter(isValidItem);
-
-            // ✅ REMOVE DUPLICATES USING itemId
-            const uniqueItems = [];
-            const seenIds = new Set();
-
-            allItems.forEach(item => {
-                if (!seenIds.has(item.itemId)) {
-                    seenIds.add(item.itemId);
-                    uniqueItems.push(item);
-                }
-            });
-
-            // SORT BY DATE
-            uniqueItems.sort((a, b) => new Date(b.dateReported) - new Date(a.dateReported));
+            // Combine lost and found items, newest first
+            const allItems = [...lostItems, ...foundItems];
+            allItems.sort((a, b) => new Date(b.dateReported) - new Date(a.dateReported));
 
             itemsContainer.innerHTML = "";
 
-            if (uniqueItems.length === 0) {
-                itemsContainer.innerHTML = "<p>No items found.</p>";
+            // Filter items with images
+            let itemsWithImages = allItems.filter(item => item.imageUrl);
+
+            // Remove duplicates based on itemName + imageUrl + type + reportedBy + dateReported + location
+            const seen = new Set();
+            itemsWithImages = itemsWithImages.filter(item => {
+                const key = (
+                    (item.itemName || '') + "|" +
+                    (item.imageUrl || '') + "|" +
+                    (item.type || '') + "|" +
+                    (item.reportedBy || '') + "|" +
+                    (item.dateReported || '') + "|" +
+                    (item.location || '')
+                ).toLowerCase();
+                if (seen.has(key)) return false;
+                seen.add(key);
+                return true;
+            });
+
+            if (itemsWithImages.length === 0) {
+                itemsContainer.innerHTML = "<p>No items with images found.</p>";
                 return;
             }
 
-            // DISPLAY ITEMS
-            uniqueItems.forEach(item => {
+            // Render cards
+            itemsWithImages.forEach(item => {
                 const card = document.createElement("div");
                 card.className = "item-card";
 
@@ -81,35 +71,33 @@ document.addEventListener("DOMContentLoaded", () => {
                         <img src="${item.imageUrl}" alt="${item.itemName}">
                     </div>
                     <div class="item-details">
-                        <p><strong>Item Name:</strong> ${item.itemName}</p>
+                        <p><strong>Item Name:</strong> ${item.itemName || ''}</p>
                         <p><strong>Status:</strong> ${item.type.toUpperCase()}</p>
-                        <p><strong>Date Reported:</strong> ${item.dateReported}</p>
+                        <p><strong>Date Reported:</strong> ${item.dateReported || ''}</p>
                         <button class="details-btn">View Full Details</button>
 
                         <div class="print-only-details">
-                            <p><strong>Category:</strong> ${item.category}</p>
-                            <p><strong>Description:</strong> ${item.description}</p>
-                            <p><strong>Location:</strong> ${item.location}</p>
-                            <p><strong>Reported By:</strong> ${item.reportedBy}</p>
-                            <p><strong>Item ID:</strong> ${item.itemId}</p>
+                            <p><strong>Category:</strong> ${item.category || ''}</p>
+                            <p><strong>Description:</strong> ${item.description || ''}</p>
+                            <p><strong>Location:</strong> ${item.location || ''}</p>
+                            <p><strong>Reported By:</strong> ${item.reportedBy || ''}</p>
+                            <p><strong>Item ID:</strong> ${item.itemId || ''}</p>
                         </div>
                     </div>
                 `;
 
-                // DETAILS BUTTON
                 card.querySelector(".details-btn").addEventListener("click", () => {
                     const params = new URLSearchParams({
-                        itemName: item.itemName,
-                        category: item.category,
-                        description: item.description,
-                        dateReported: item.dateReported,
-                        location: item.location,
-                        status: item.type,
-                        itemId: item.itemId,
-                        reportedBy: item.reportedBy,
-                        imageUrl: item.imageUrl
+                        itemName:     item.itemName     || '',
+                        category:     item.category     || '',
+                        description:  item.description  || '',
+                        dateReported: item.dateReported || '',
+                        location:     item.location     || '',
+                        status:       item.type         || '',
+                        itemId:       item.itemId       || '',
+                        reportedBy:   item.reportedBy   || '',
+                        imageUrl:     item.imageUrl     || ''
                     });
-
                     window.location.href = `recent-items.html?${params.toString()}`;
                 });
 
@@ -122,23 +110,19 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // INITIAL LOAD
     loadItems();
 
     // SEARCH FUNCTION
     searchInput.addEventListener("keyup", () => {
         const value = searchInput.value.toLowerCase();
         const cards = document.querySelectorAll(".item-card");
-
         cards.forEach(card => {
             const text = card.innerText.toLowerCase();
             card.style.display = text.includes(value) ? "flex" : "none";
         });
     });
 
-    // FILTER BUTTON (PLACEHOLDER)
-    filterBtn.addEventListener("click", () => {
-        alert("Filter function coming soon.");
-    });
+    // FILTER BUTTON (placeholder)
+    filterBtn.addEventListener("click", () => alert("Filter function coming soon."));
 
 });
