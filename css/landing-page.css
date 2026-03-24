@@ -1,3 +1,4 @@
+/* RESET */
 * {
     margin: 0;
     padding: 0;
@@ -17,6 +18,7 @@ body {
     padding: 18px 40px;
     background: #0A1C3A;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    flex-wrap: wrap; /* allows wrapping on small screens */
 }
 
 .navbar-brand {
@@ -31,6 +33,7 @@ body {
     border: none;
     border-radius: 6px;
     cursor: pointer;
+    margin-top: 10px; /* spacing if wrapped */
 }
 
 /* MAIN LAYOUT */
@@ -58,7 +61,7 @@ body {
 
 /* SIGN IN BUTTON */
 .signin-btn {
-    background: #0A1C3A;;
+    background: #0A1C3A;
     color: white;
     padding: 14px 38px;
     border: none;
@@ -87,4 +90,64 @@ body {
 .right-panel p {
     color: #555;
     line-height: 1.7;
+}
+
+/* MEDIA QUERIES FOR RESPONSIVENESS */
+
+/* Tablet & Small Laptops */
+@media (max-width: 1024px) {
+    .main-layout {
+        grid-template-columns: 1fr;
+        padding: 60px 40px;
+        gap: 40px;
+    }
+
+    .right-panel {
+        padding: 30px;
+    }
+
+    .navbar {
+        padding: 15px 30px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    .navbar {
+        justify-content: center;
+    }
+
+    .navbar-brand {
+        font-size: 20px;
+    }
+
+    .navbar-account {
+        width: 100%;
+        text-align: center;
+        padding: 12px;
+        margin-top: 12px;
+    }
+
+    .main-layout {
+        padding: 40px 20px;
+        gap: 30px;
+    }
+
+    .logo {
+        width: 140px;
+        height: 140px;
+    }
+
+    .signin-btn {
+        padding: 12px 28px;
+        font-size: 14px;
+    }
+
+    .right-panel {
+        padding: 20px;
+    }
+
+    .right-panel h2 {
+        font-size: 20px;
+    }
 }
