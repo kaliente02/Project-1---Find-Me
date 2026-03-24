@@ -7,8 +7,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const foundDate = document.getElementById("foundDate");
   const foundLocation = document.getElementById("foundLocation");
 
+  // PROCEED BUTTON LOGIC
   proceedBtn.addEventListener("click", () => {
-
     const data = {
       itemName: itemName.value.trim(),
       category: category.value,
@@ -22,10 +22,15 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // Save page 1 data temporarily
     localStorage.setItem("reportFoundStep1", JSON.stringify(data));
-
-    // Go to page 2
     window.location.href = "report-found-2.html";
   });
+
+  // HOME BUTTON LOGIC
+  const homeBtn = document.getElementById("homeBtn");
+  if (homeBtn) {
+    homeBtn.addEventListener("click", () => {
+      window.location.href = "../html/home.html";
+    });
+  }
 });

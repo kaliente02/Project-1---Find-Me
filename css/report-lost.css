@@ -96,3 +96,18 @@ input, textarea, select {
 .hidden {
     display: none;
 }
+
+/* NAVIGATION & PRIMARY BUTTON HOVER EFFECTS */
+/* GLOW HOVER EFFECT */
+#homeBtn,
+.primary-btn {
+    cursor: pointer;
+    transition: box-shadow 0.3s ease, color 0.3s ease;
+}
+
+/* Hover glow */
+#homeBtn:hover,
+.primary-btn:hover {
+    color: #ffffff; /* keep text white */
+    box-shadow: 0 0 8px 2px rgba(255, 255, 255, 0.7); /* white glow */
+}
