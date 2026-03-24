@@ -57,6 +57,25 @@ body {
     cursor: pointer;
 }
 
+/* PRINT BUTTON */
+.print-btn {
+    padding: 8px 16px;
+    background: white;
+    color: #0A1C3A;
+    border: 2px solid white;
+    font-size: 15px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-family: 'Georgia', serif;
+    transition: 0.3s;
+}
+
+.print-btn:hover {
+    background-color: #0A1C3A;
+    color: white;
+    border-color: #aac4ff;
+}
+
 /* MAIN */
 .main-container {
     padding: 40px;
@@ -72,7 +91,7 @@ body {
 
 .left-actions {
     display: flex;
-    gap: 15px; /* Buttons closer together */
+    gap: 15px;
 }
 
 .primary-btn {
@@ -161,4 +180,40 @@ body {
 .details-btn:hover {
     background-color: #0A1C3A;
     color: white;
+}
+
+/* PRINT ONLY DETAILS - hidden on screen */
+.print-only-details {
+    display: none;
+}
+
+/* PRINT STYLES */
+@media print {
+    .navbar {
+        background-color: #0A1C3A !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .nav-icons,
+    .action-row,
+    .details-btn {
+        display: none !important;
+    }
+
+    .print-only-details {
+        display: block !important;
+        margin-top: 10px;
+        border-top: 1px solid #0A1C3A;
+        padding-top: 10px;
+    }
+
+    .item-card {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+
+    body {
+        background: white;
+    }
 }

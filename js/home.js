@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const reportFoundBtn = document.getElementById("reportFoundBtn");
     const profileBtn = document.getElementById("profileBtn");
     const filterBtn = document.getElementById("filterBtn");
+    const printBtn = document.getElementById("printBtn");
     const searchInput = document.getElementById("searchInput");
     const itemsContainer = document.getElementById("itemsContainer");
 
@@ -13,6 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
     reportLostBtn.addEventListener("click", () => window.location.href = "report-lost-1.html");
     reportFoundBtn.addEventListener("click", () => window.location.href = "report-found.html");
     profileBtn.addEventListener("click", () => window.location.href = "profile.html");
+    printBtn.addEventListener("click", () => window.print());
 
     async function fetchItems(url, type) {
         const response = await fetch(url);
@@ -46,10 +48,18 @@ document.addEventListener("DOMContentLoaded", () => {
                         <img src="${item.imageUrl || '../assets/images/placeholder.jpg'}" alt="${item.itemName}">
                     </div>
                     <div class="item-details">
-                        <p><strong>Item Name:</strong> ${item.itemName}</p>
+                        <p><strong>Item Name:</strong> ${item.itemName || ''}</p>
                         <p><strong>Status:</strong> ${item.type.toUpperCase()}</p>
                         <p><strong>Date Reported:</strong> ${item.dateReported || ''}</p>
                         <button class="details-btn">View Full Details</button>
+
+                        <div class="print-only-details">
+                            <p><strong>Category:</strong> ${item.category || ''}</p>
+                            <p><strong>Description:</strong> ${item.description || ''}</p>
+                            <p><strong>Location:</strong> ${item.location || ''}</p>
+                            <p><strong>Reported By:</strong> ${item.reportedBy || ''}</p>
+                            <p><strong>Item ID:</strong> ${item.itemId || ''}</p>
+                        </div>
                     </div>
                 `;
 

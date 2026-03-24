@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 
     // Replace with real user data
-    const fullName = "Shane Hollander";
+    const fullName = "User Name"; // This should be dynamically set based on logged-in user data
     document.getElementById("fullName").textContent = fullName;
 
     document.getElementById("manageAccountBtn").addEventListener("click", () => {
