@@ -11,11 +11,27 @@ document.addEventListener("DOMContentLoaded", () => {
     const LOST_URL = "https://script.google.com/macros/s/AKfycbwlDsBZv9NJFS4DvFEqioEyTvUMLmH2ckjjLVJUhIOpja8bC9X4qt6lifsQXFAVL8fK/exec";
     const FOUND_URL = "https://script.google.com/macros/s/AKfycbzo2DgJ47oOdRGzOMBZCNt0wPn1jsdUTvdM2nJ5y6sd-7FXSzwPmvUJfbmdtPNG-PAIqQ/exec";
 
+    // NAVIGATION
     reportLostBtn.addEventListener("click", () => window.location.href = "report-lost-1.html");
     reportFoundBtn.addEventListener("click", () => window.location.href = "report-found.html");
     profileBtn.addEventListener("click", () => window.location.href = "profile.html");
     printBtn.addEventListener("click", () => window.print());
 
+    // ✅ VALIDATION FUNCTION (ONLY COMPLETE DATA)
+    function isValidItem(item) {
+        return (
+            item.itemName &&
+            item.category &&
+            item.description &&
+            item.dateReported &&
+            item.location &&
+            item.reportedBy &&
+            item.itemId &&
+            item.imageUrl
+        );
+    }
+
+    // FETCH DATA
     async function fetchItems(url, type) {
         const response = await fetch(url);
         const data = await response.json();
@@ -29,52 +45,71 @@ document.addEventListener("DOMContentLoaded", () => {
                 fetchItems(FOUND_URL, "found")
             ]);
 
-            const allItems = [...lostItems, ...foundItems];
-            allItems.sort((a, b) => new Date(b.dateReported) - new Date(a.dateReported));
+            let allItems = [...lostItems, ...foundItems];
+
+            // ✅ FILTER: REMOVE INCOMPLETE DATA
+            allItems = allItems.filter(isValidItem);
+
+            // ✅ REMOVE DUPLICATES USING itemId
+            const uniqueItems = [];
+            const seenIds = new Set();
+
+            allItems.forEach(item => {
+                if (!seenIds.has(item.itemId)) {
+                    seenIds.add(item.itemId);
+                    uniqueItems.push(item);
+                }
+            });
+
+            // SORT BY DATE
+            uniqueItems.sort((a, b) => new Date(b.dateReported) - new Date(a.dateReported));
 
             itemsContainer.innerHTML = "";
 
-            if (allItems.length === 0) {
+            if (uniqueItems.length === 0) {
                 itemsContainer.innerHTML = "<p>No items found.</p>";
                 return;
             }
 
-            allItems.forEach(item => {
+            // DISPLAY ITEMS
+            uniqueItems.forEach(item => {
                 const card = document.createElement("div");
                 card.className = "item-card";
 
                 card.innerHTML = `
                     <div class="item-image">
-                        <img src="${item.imageUrl || '../assets/images/placeholder.jpg'}" alt="${item.itemName}">
+                        <img src="${item.imageUrl}" alt="${item.itemName}">
                     </div>
                     <div class="item-details">
-                        <p><strong>Item Name:</strong> ${item.itemName || ''}</p>
+                        <p><strong>Item Name:</strong> ${item.itemName}</p>
                         <p><strong>Status:</strong> ${item.type.toUpperCase()}</p>
-                        <p><strong>Date Reported:</strong> ${item.dateReported || ''}</p>
+                        <p><strong>Date Reported:</strong> ${item.dateReported}</p>
                         <button class="details-btn">View Full Details</button>
 
                         <div class="print-only-details">
-                            <p><strong>Category:</strong> ${item.category || ''}</p>
-                            <p><strong>Description:</strong> ${item.description || ''}</p>
-                            <p><strong>Location:</strong> ${item.location || ''}</p>
-                            <p><strong>Reported By:</strong> ${item.reportedBy || ''}</p>
-                            <p><strong>Item ID:</strong> ${item.itemId || ''}</p>
+                            <p><strong>Category:</strong> ${item.category}</p>
+                            <p><strong>Description:</strong> ${item.description}</p>
+                            <p><strong>Location:</strong> ${item.location}</p>
+                            <p><strong>Reported By:</strong> ${item.reportedBy}</p>
+                            <p><strong>Item ID:</strong> ${item.itemId}</p>
                         </div>
                     </div>
                 `;
 
+                // DETAILS BUTTON
                 card.querySelector(".details-btn").addEventListener("click", () => {
                     const params = new URLSearchParams({
-                        itemName:     item.itemName     || '',
-                        category:     item.category     || '',
-                        description:  item.description  || '',
-                        dateReported: item.dateReported || '',
-                        location:     item.location     || '',
-                        status:       item.type         || '',
-                        itemId:       item.itemId       || '',
-                        reportedBy:   item.reportedBy   || '',
-                        imageUrl:     item.imageUrl     || ''
+                        itemName: item.itemName,
+                        category: item.category,
+                        description: item.description,
+                        dateReported: item.dateReported,
+                        location: item.location,
+                        status: item.type,
+                        itemId: item.itemId,
+                        reportedBy: item.reportedBy,
+                        imageUrl: item.imageUrl
                     });
+
                     window.location.href = `recent-items.html?${params.toString()}`;
                 });
 
@@ -87,17 +122,23 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    // INITIAL LOAD
     loadItems();
 
+    // SEARCH FUNCTION
     searchInput.addEventListener("keyup", () => {
         const value = searchInput.value.toLowerCase();
         const cards = document.querySelectorAll(".item-card");
+
         cards.forEach(card => {
             const text = card.innerText.toLowerCase();
             card.style.display = text.includes(value) ? "flex" : "none";
         });
     });
 
-    filterBtn.addEventListener("click", () => alert("Filter function coming soon."));
+    // FILTER BUTTON (PLACEHOLDER)
+    filterBtn.addEventListener("click", () => {
+        alert("Filter function coming soon.");
+    });
 
 });
