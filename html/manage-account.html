@@ -5,6 +5,7 @@
     <title>Account Settings</title>
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/manage-account.css">
+    <script type="module" src="../js/manage-account.js"></script>
 </head>
 <body>
 
@@ -58,20 +59,25 @@
                 </div>
 
                 <div class="field full-width">
-                    <label>Password</label>
-                    <div class="password-row">
-                        <span>••••••••••</span>
-                        <button id="changePasswordBtn">Change Password</button>
-                    </div>
-                </div>
+                <label>Change Password</label>
 
+                <input type="password" id="currentPassword" placeholder="Current Password">
+                <input type="password" id="newPassword" placeholder="New Password">
+                <input type="password" id="confirmNewPassword" placeholder="Confirm New Password">
+
+                <button id="updatePasswordBtn">Update Password</button>
+            </div>
             </div>
         </div>
     </div>
-
-    <button id="logoutBtn" class="logout-btn">Log Out</button>
+    
+    <!-- ACTION BUTTONS -->
+    <div class="buttons-row">
+        <button id="saveBtn" class="account-btn save-btn">Save</button>
+        <button id="logoutBtn" class="account-btn logout-btn">Log Out</button>
+    </div>
+</div>
 </div>
 
-<script src="../js/manage-account.js"></script>
 </body>
 </html>

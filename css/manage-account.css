@@ -255,32 +255,6 @@ h1 span {
     color: white;
 }
 
-/* ── LOGOUT ── */
-.logout-btn {
-    margin-top: 40px;
-    width: 100%;
-    padding: 14px;
-    background: white;
-    border: 1.5px solid var(--danger);
-    border-radius: 10px;
-    color: var(--danger);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.92rem;
-    font-weight: 600;
-    cursor: pointer;
-    letter-spacing: 0.3px;
-    transition: all 0.2s;
-}
-
-.logout-btn:hover {
-    background: var(--danger);
-    color: white;
-}
-
-.logout-btn:active {
-    transform: scale(0.99);
-}
-
 /* ── RESPONSIVE ── */
 @media (max-width: 700px) {
     .account-container { padding: 32px 24px; }
@@ -288,4 +262,102 @@ h1 span {
     .profile-section { width: 100%; }
     .divider { display: none; }
     .fields-grid { grid-template-columns: 1fr; }
+}
+
+/* ── BUTTONS ROW ── */
+.buttons-row {
+    display: flex;
+    justify-content: flex-end; /* or space-between if you want distance */
+    gap: 16px;
+    margin-top: 40px;
+}
+
+/* Make both buttons proportional */
+.buttons-row button {
+    flex: 1; /* Equal width */
+    padding: 14px 0;
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.92rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+/* SAVE BUTTON */
+/* Buttons Row */
+.buttons-row {
+    display: flex;
+    justify-content: flex-end; /* buttons on right */
+    gap: 16px;
+    margin-top: 40px;
+}
+
+/* Common styles for both buttons */
+.account-btn {
+    flex: 1; /* Equal width */
+    padding: 14px 0; /* height is same */
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.92rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+}
+
+/* ── BUTTONS ROW ── */
+.buttons-row {
+    display: flex;
+    justify-content: flex-end; /* buttons on right */
+    gap: 16px;
+    margin-top: 40px;
+}
+
+/* Common styles for both buttons */
+.buttons-row button {
+    flex: 1; /* Equal width */
+    padding: 14px 0; /* same height */
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.92rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+}
+
+/* SAVE BUTTON */
+.save-btn {
+    background: #dbeafe; /* lighter blue */
+    border: 1.5px solid var(--accent); /* blue border */
+    color: var(--accent); /* blue text */
+}
+
+.save-btn:hover {
+    background: var(--accent); /* solid blue on hover */
+    color: white;
+    box-shadow: 0 6px 12px rgba(37,99,235,0.2);
+}
+
+.save-btn:active {
+    transform: scale(0.98);
+}
+
+/* LOGOUT BUTTON */
+.logout-btn {
+    background: var(--danger); /* strong red */
+    border: 1.5px solid var(--danger-dark);
+    color: white;
+}
+
+.logout-btn:hover {
+    background: var(--danger-dark); /* darker red */
+}
+
+.logout-btn:active {
+    transform: scale(0.98);
 }

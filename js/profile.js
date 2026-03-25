@@ -18,4 +18,13 @@ document.addEventListener("DOMContentLoaded", () => {
         window.location.href = "../html/login.html";
     });
 
+     // HOME BUTTON LOGIC
+    const homeBtn = document.getElementById("homeBtn");
+    if (homeBtn) {
+        homeBtn.addEventListener("click", () => {
+        // Redirect to home.html
+        window.location.href = "../html/home.html";
+        });
+    }
+
 });
