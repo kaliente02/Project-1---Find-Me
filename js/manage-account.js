@@ -105,6 +105,7 @@ imageInput.addEventListener("change", () => {
         const reader = new FileReader();
         reader.onload = () => {
             profileImage.src = reader.result;
+            // ✅ Save image to localStorage so profile.js can read it
             localStorage.setItem("profileImage", reader.result);
         };
         reader.readAsDataURL(file);
@@ -116,7 +117,7 @@ const savedImage = localStorage.getItem("profileImage");
 if (savedImage) profileImage.src = savedImage;
 
 // ─────────────────────────────
-// SAVE CHANGES (FIXED)
+// SAVE CHANGES
 // ─────────────────────────────
 document.getElementById("saveBtn").addEventListener("click", async () => {
 
@@ -140,7 +141,7 @@ document.getElementById("saveBtn").addEventListener("click", async () => {
             displayName: fullName
         });
 
-        // 🔹 SAFE SAVE (works even if doc missing)
+        // 🔹 Save to Firestore
         await setDoc(doc(db, "users", currentUser.uid), {
             fullName,
             email,
@@ -149,8 +150,10 @@ document.getElementById("saveBtn").addEventListener("click", async () => {
             updatedAt: new Date()
         }, { merge: true });
 
-        console.log("Saved successfully!");
+        // ✅ Sync fullName to localStorage so profile.js can read it
+        localStorage.setItem("fullName", fullName);
 
+        console.log("Saved successfully!");
         alert("Profile updated successfully!");
 
     } catch (error) {
@@ -162,7 +165,6 @@ document.getElementById("saveBtn").addEventListener("click", async () => {
 // ─────────────────────────────
 // CHANGE PASSWORD
 // ─────────────────────────────
-
 document.getElementById("updatePasswordBtn").addEventListener("click", async () => {
 
     if (!currentUser) return;
