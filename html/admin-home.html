@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FINDME | Home</title>
+    <link rel="stylesheet" href="../css/home.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar">
+    <div class="logo-section">
+        <div class="logo-circle">
+            <img src="../assets/images/logo.jpg" alt="Logo">
+        </div>
+        <h1 class="logo-text">FINDME</h1>
+    </div>
+
+    <div class="nav-icons">
+        <button id="printBtn" class="print-btn">🖨️ Print</button>
+        <span class="notification">🔔</span>
+        <img src="../assets/images/profile.jpg" class="profile-icon" id="profileBtn">
+    </div>
+</header>
+
+<!-- MAIN -->
+<div class="main-container">
+
+    <!-- ACTION BUTTONS -->
+    <div class="action-row">
+        <div class="left-actions">
+
+            <button id="reportFoundBtn" class="primary-btn">Reports of Claim Request</button>
+            <button id="reportLostBtn" class="primary-btn">Home</button> 
+        </div>
+
+        <div class="search-filter">
+            <input type="text" id="searchInput" placeholder="Search">
+            <button id="filterBtn">Filter</button>
+        </div>
+    </div>
+
+    <h2 class="section-title">Recent Items</h2>
+
+    <!-- Container for dynamic items -->
+    <div id="itemsContainer">
+        <!-- JS will populate items here -->
+    </div>
+
+</div>
+
+<script src="../js/admin-home.js"></script>
+</body>
+</html>

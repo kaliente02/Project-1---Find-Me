@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Profile</title>
+    <link rel="stylesheet" href="../css/profile.css">
+</head>
+
+<header class="navbar">
+    <div class="logo">
+        <img src="../assets/images/logo.jpg" alt="FINDME">
+        <span>FINDME</span>
+    </div>
+
+    <h2>ADMIN</h2>
+
+    <div class="nav-actions">
+        <button id="homeBtn">Home</button>
+        <span class="icon">🔔</span>
+        <span class="icon">👤</span>
+    </div>
+</header>
+
+<body>
+
+    <div class="profile-container">
+        <div class="profile-card">
+
+            <div class="profile-image">
+                <!-- Replace with real photo if available:
+                <img src="../assets/images/profile-1.jpg" alt="Profile Picture"> -->
+                <svg class="avatar-placeholder" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="8" r="4.5"/>
+                    <path d="M3 21c0-5 4.029-9 9-9s9 4 9 9"/>
+                </svg>
+            </div>
+
+            <div class="full-name-box" id="fullName">Full Name</div>
+
+            <button class="menu-btn" id="manageAccountBtn">Manage Account</button>
+            <button class="menu-btn" id="myActivityBtn">Reports and Requests</button>
+
+            <button class="logout-btn" id="logoutBtn">Log Out</button>
+
+        </div>
+    </div>
+
+    <script src="../js/admin-profile.js"></script>
+
+</body>
+</html>
