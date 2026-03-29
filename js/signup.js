@@ -32,6 +32,7 @@ document.getElementById('signupBtn').addEventListener('click', async () => {
     const fullName = document.getElementById('fullName').value.trim();
     const idNumber = document.getElementById('idNumber').value.trim();
     const email = document.getElementById('signupEmail').value.trim();
+    const role = document.getElementById('role').value;
     const password = document.getElementById('signupPassword').value;
     const confirmPassword = document.getElementById('confirmPassword').value;
     const msgEl = document.getElementById('signupMsg');
@@ -39,7 +40,7 @@ document.getElementById('signupBtn').addEventListener('click', async () => {
     msgEl.innerText = "";
 
     // 🔹 Validation
-    if (!fullName || !idNumber || !email || !password || !confirmPassword) {
+    if (!fullName || !idNumber || !email || !role || !password || !confirmPassword) {
         msgEl.innerText = "All fields are required.";
         msgEl.style.color = "red";
         return;
@@ -69,7 +70,7 @@ document.getElementById('signupBtn').addEventListener('click', async () => {
             idNumber,
             email,
             contact: "",
-            role: "User",
+            role,
             createdAt: new Date()
         }, { merge: true });
 

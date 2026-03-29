@@ -27,12 +27,17 @@ body {
     color: #555;
 }
 
-.form-container input {
+.form-container input,
+.form-container select {
     width: 100%;
     padding: 10px;
     margin-top: 5px;
     border-radius: 5px;
     border: 1px solid #ccc;
+    box-sizing: border-box;
+    background-color: #fff;
+    color: #333;
+    appearance: auto;
 }
 
 .form-container button {
