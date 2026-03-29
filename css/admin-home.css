@@ -141,7 +141,6 @@ body {
 
 /* ── FILTER PANEL ─────────────────────────────────────────────────── */
 .filter-panel {
-    /* Collapsed by default */
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.38s cubic-bezier(0.4, 0, 0.2, 1),
@@ -163,7 +162,6 @@ body {
     padding: 24px 28px 20px;
 }
 
-/* Grid of filter fields */
 .filter-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -203,7 +201,6 @@ body {
     border-color: #132d5e;
 }
 
-/* Select wrapper for custom arrow */
 .select-wrap {
     position: relative;
 }
@@ -241,7 +238,6 @@ body {
     pointer-events: none;
 }
 
-/* Filter action buttons */
 .filter-actions {
     display: flex;
     gap: 12px;
@@ -278,7 +274,7 @@ body {
     background: #f4f6fb;
 }
 
-/* ── TOAST NOTIFICATION ───────────────────────────────────────────── */
+/* ── TOAST ────────────────────────────────────────────────────────── */
 .filter-toast {
     position: fixed;
     bottom: 2rem;

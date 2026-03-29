@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>FINDME | Home</title>
-    <link rel="stylesheet" href="../css/home.css">
+    <title>FINDME | Admin Home</title>
+    <link rel="stylesheet" href="../css/admin-home.css">
 </head>
 <body>
 
@@ -29,14 +29,82 @@
     <!-- ACTION BUTTONS -->
     <div class="action-row">
         <div class="left-actions">
-
             <button id="reportFoundBtn" class="primary-btn">Reports of Claim Request</button>
-            <button id="reportLostBtn" class="primary-btn">Home</button> 
+            <button id="reportLostBtn" class="primary-btn">Home</button>
         </div>
 
         <div class="search-filter">
             <input type="text" id="searchInput" placeholder="Search">
             <button id="filterBtn">Filter</button>
+        </div>
+    </div>
+
+    <!-- FILTER PANEL (hidden by default, toggled by filterBtn) -->
+    <div class="filter-panel" id="filterPanel">
+        <div class="filter-panel-inner">
+
+            <div class="filter-grid">
+
+                <div class="filter-field">
+                    <label for="filterCategory">Category</label>
+                    <div class="select-wrap">
+                        <select id="filterCategory">
+                            <option value="">All Categories</option>
+                            <option>Electronics</option>
+                            <option>Clothing</option>
+                            <option>Furniture</option>
+                            <option>Books</option>
+                            <option>Food &amp; Beverage</option>
+                        </select>
+                        <span class="select-arrow"></span>
+                    </div>
+                </div>
+
+                <div class="filter-field">
+                    <label for="filterStatus">Status</label>
+                    <div class="select-wrap">
+                        <select id="filterStatus">
+                            <option value="">All Statuses</option>
+                            <option value="lost">Lost</option>
+                            <option value="found">Found</option>
+                        </select>
+                        <span class="select-arrow"></span>
+                    </div>
+                </div>
+
+                <div class="filter-field">
+                    <label for="filterLocation">Location</label>
+                    <input type="text" id="filterLocation" placeholder="Type location…">
+                </div>
+
+                <div class="filter-field">
+                    <label for="filterDate">Date Reported</label>
+                    <input type="date" id="filterDate">
+                </div>
+
+                <div class="filter-field">
+                    <label for="filterColor">Color</label>
+                    <div class="select-wrap">
+                        <select id="filterColor">
+                            <option value="">All Colors</option>
+                            <option>Red</option>
+                            <option>Blue</option>
+                            <option>Green</option>
+                            <option>Black</option>
+                            <option>White</option>
+                            <option>Yellow</option>
+                        </select>
+                        <span class="select-arrow"></span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="filter-actions">
+                <button class="btn-apply" id="applyFilterBtn">Apply Filter</button>
+                <button class="btn-clear" id="clearFilterBtn">Clear</button>
+            </div>
+
         </div>
     </div>
 
@@ -48,6 +116,9 @@
     </div>
 
 </div>
+
+<!-- TOAST -->
+<div class="filter-toast" id="filterToast"></div>
 
 <script src="../js/admin-home.js"></script>
 </body>
