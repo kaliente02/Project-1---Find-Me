@@ -2,7 +2,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/fireba
 import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-auth.js";
 
 const firebaseConfig = {
-   apiKey: "AIzaSyCvKJHcpPYl1vpQCxEHGTG3zLFr-1Mwdv4",
+  apiKey: "AIzaSyCvKJHcpPYl1vpQCxEHGTG3zLFr-1Mwdv4",
   authDomain: "find-me-9f46b.firebaseapp.com",
   projectId: "find-me-9f46b",
   storageBucket: "find-me-9f46b.firebasestorage.app",
@@ -19,6 +19,7 @@ document.getElementById('loginBtn').addEventListener('click', async (e) => {
 
   const email = document.getElementById('loginEmail').value.trim();
   const password = document.getElementById('loginPassword').value;
+  const role = document.getElementById('roleSelect').value;
   const msgEl = document.getElementById('loginMsg');
 
   if (!email || !password) {
@@ -27,10 +28,22 @@ document.getElementById('loginBtn').addEventListener('click', async (e) => {
     return;
   }
 
+  if (!role) {
+    msgEl.innerText = "Please select a role.";
+    msgEl.style.color = 'red';
+    return;
+  }
+
   try {
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
     sessionStorage.setItem('userEmail', userCredential.user.email);
-    window.location.href = "../html/home.html";
+    sessionStorage.setItem('userRole', role);
+
+    if (role === 'admin') {
+      window.location.href = "../html/admin-home.html";
+    } else {
+      window.location.href = "../html/home.html";
+    }
   } catch (error) {
     console.error(error);
     msgEl.innerText = error.message;

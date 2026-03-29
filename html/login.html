@@ -3,12 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Log In</title>
-    <link rel="stylesheet" href="../css/signup.css">
-
-    <!-- Firebase initialization -->
+    <link rel="stylesheet" href="../css/login.css">
     <script type="module" src="register.js" defer></script>
-
-    <!-- Login JS as a module -->
     <script type="module" src="../js/login.js" defer></script>
 </head>
 <body>
@@ -19,6 +15,13 @@
 
         <label for="loginPassword">Password</label>
         <input type="password" id="loginPassword" placeholder="Enter password">
+
+        <label for="roleSelect">Role</label>
+        <select id="roleSelect">
+            <option value="" disabled selected>Select your role</option>
+            <option value="user">User</option>
+            <option value="admin">Admin</option>
+        </select>
 
         <button id="loginBtn">Log In</button>
         <p id="loginMsg" class="message"></p>
