@@ -1,0 +1,165 @@
+/* ── FILTER PANEL ─────────────────────────────────────────────────── */
+/* Append these styles to your existing admin-claim-request.css       */
+
+#filterBtn.active {
+    background-color: #0A1C3A;
+    color: white;
+}
+
+.filter-panel {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.38s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity    0.28s ease,
+                margin     0.28s ease;
+    opacity: 0;
+    margin-bottom: 0;
+}
+
+.filter-panel.open {
+    max-height: 500px;
+    opacity: 1;
+    margin-bottom: 24px;
+}
+
+.filter-panel-inner {
+    background: white;
+    border: 2px solid #0A1C3A;
+    padding: 24px 28px 20px;
+}
+
+.filter-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px 20px;
+    margin-bottom: 20px;
+}
+
+.filter-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.filter-field label {
+    font-size: 13px;
+    font-weight: bold;
+    color: #0A1C3A;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.filter-field input[type="text"],
+.filter-field input[type="date"] {
+    padding: 8px 12px;
+    border: 2px solid #0A1C3A;
+    font-family: 'Georgia', serif;
+    font-size: 14px;
+    color: #1a1a1a;
+    background: #f4f6fb;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+}
+
+.filter-field input[type="text"]:focus,
+.filter-field input[type="date"]:focus {
+    background: white;
+    border-color: #132d5e;
+}
+
+.select-wrap {
+    position: relative;
+}
+
+.select-wrap select {
+    width: 100%;
+    padding: 8px 32px 8px 12px;
+    border: 2px solid #0A1C3A;
+    font-family: 'Georgia', serif;
+    font-size: 14px;
+    color: #1a1a1a;
+    background: #f4f6fb;
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+}
+
+.select-wrap select:focus {
+    background: white;
+    border-color: #132d5e;
+}
+
+.select-arrow {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid #0A1C3A;
+    pointer-events: none;
+}
+
+.filter-actions {
+    display: flex;
+    gap: 12px;
+    border-top: 1px solid #c8cdd8;
+    padding-top: 16px;
+}
+
+.btn-apply,
+.btn-clear {
+    padding: 9px 26px;
+    font-family: 'Georgia', serif;
+    font-size: 14px;
+    cursor: pointer;
+    border: 2px solid #0A1C3A;
+    transition: 0.25s;
+}
+
+.btn-apply {
+    background: #0A1C3A;
+    color: white;
+}
+
+.btn-apply:hover {
+    background: #132d5e;
+    border-color: #132d5e;
+}
+
+.btn-clear {
+    background: white;
+    color: #0A1C3A;
+}
+
+.btn-clear:hover {
+    background: #f4f6fb;
+}
+
+.filter-toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(12px);
+    background: #0A1C3A;
+    color: white;
+    padding: 10px 24px;
+    border-radius: 50px;
+    font-family: 'Georgia', serif;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.22s ease, transform 0.22s ease;
+    white-space: nowrap;
+    z-index: 1000;
+}
+
+.filter-toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}

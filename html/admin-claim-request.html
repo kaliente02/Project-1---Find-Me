@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>FINDME | Recent Claims</title>
-    <link rel="stylesheet" href="../css/recent-claim.css">
+    <link rel="stylesheet" href="../css/admin-claim-request.css">
 </head>
 <body>
 
@@ -38,6 +38,55 @@
         </div>
     </div>
 
+    <!-- FILTER PANEL -->
+    <div class="filter-panel" id="filterPanel">
+        <div class="filter-panel-inner">
+
+            <div class="filter-grid">
+
+                <div class="filter-field">
+                    <label for="filterStatus">Status</label>
+                    <div class="select-wrap">
+                        <select id="filterStatus">
+                            <option value="">All Statuses</option>
+                            <option>Pending</option>
+                            <option>Approved</option>
+                            <option>Rejected</option>
+                        </select>
+                        <span class="select-arrow"></span>
+                    </div>
+                </div>
+
+                <div class="filter-field">
+                    <label for="filterName">Full Name</label>
+                    <input type="text" id="filterName" placeholder="Type name…">
+                </div>
+
+                <div class="filter-field">
+                    <label for="filterItem">Item Name</label>
+                    <input type="text" id="filterItem" placeholder="Type item…">
+                </div>
+
+                <div class="filter-field">
+                    <label for="filterLocation">Location Lost</label>
+                    <input type="text" id="filterLocation" placeholder="Type location…">
+                </div>
+
+                <div class="filter-field">
+                    <label for="filterDate">Date Lost</label>
+                    <input type="date" id="filterDate">
+                </div>
+
+            </div>
+
+            <div class="filter-actions">
+                <button class="btn-apply" id="applyFilterBtn">Apply Filter</button>
+                <button class="btn-clear" id="clearFilterBtn">Clear</button>
+            </div>
+
+        </div>
+    </div>
+
     <h2 class="section-title">Recent Claim Request</h2>
 
     <div id="itemsContainer"></div>
@@ -59,6 +108,9 @@
         </div>
     </div>
 </div>
+
+<!-- TOAST -->
+<div class="filter-toast" id="filterToast"></div>
 
 <script src="../js/admin-claim-request.js"></script>
 </body>

@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (homeBtn) {
         homeBtn.addEventListener("click", () => {
-            window.location.href = "../html/admin-homepage.html";
+            window.location.href = "../html/admin-home.html";
         });
     }
 

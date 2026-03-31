@@ -20,7 +20,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const CLAIM_URL = "https://script.google.com/macros/s/AKfycbztV_dRX9yMCD5-_rHMlEHFfcumogCBqJRknvihNNOf9_7OUGb0juFu8s1QG-uJ4P2pVg/exec";
 
-    // Store all loaded claims for re-filtering
     let allLoadedClaims = [];
     let toastTimer;
 
@@ -35,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
         filterBtn.classList.toggle("active", isOpen);
     });
 
-    // ── HELPERS ─────────────────────────────────────────────────────
+    // ── DRIVE IMAGE HELPERS ─────────────────────────────────────────
     function getDriveFileId(url) {
         if (!url) return null;
         const match1 = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
@@ -53,6 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return `https://drive.google.com/thumbnail?id=${id}&sz=w400`;
     }
 
+    // ── DATE FORMATTER ──────────────────────────────────────────────
     function formatDate(raw) {
         try {
             const d = new Date(raw);
@@ -60,18 +60,6 @@ document.addEventListener("DOMContentLoaded", () => {
             return d.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
         } catch (e) {
             return raw;
-        }
-    }
-
-    // Normalise a date string to YYYY-MM-DD for comparison with <input type="date">
-    function toISODate(raw) {
-        if (!raw) return "";
-        try {
-            const d = new Date(raw);
-            if (isNaN(d)) return "";
-            return d.toISOString().slice(0, 10);
-        } catch (e) {
-            return "";
         }
     }
 
@@ -109,11 +97,11 @@ document.addEventListener("DOMContentLoaded", () => {
             const card = document.createElement("div");
             card.className = "item-card";
 
-            const imageUrl    = getDriveImageUrl(claim["Proof File URL"]);
-            const itemName    = claim["Full Name"] || "—";
-            const status      = claim["Status"] || "Pending";
-            const rawDate     = claim["Date Lost"] || claim["Timestamp"] || "";
-            const dateDisplay = rawDate ? formatDate(rawDate) : "—";
+            const imageUrl     = getDriveImageUrl(claim["Proof File URL"]);
+            const itemName     = claim["Full Name"] || "—";
+            const status       = claim["Status"]    || "Pending";
+            const rawDate      = claim["Date Lost"] || claim["Timestamp"] || "";
+            const dateReported = rawDate ? formatDate(rawDate) : "—";
 
             card.innerHTML = `
                 <div class="item-image">
@@ -127,7 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <div class="labels">
                         <p><strong>Item Name:</strong> ${itemName}</p>
                         <p><strong>Status:</strong> ${status}</p>
-                        <p><strong>Date Reported:</strong> ${dateDisplay}</p>
+                        <p><strong>Date Reported:</strong> ${dateReported}</p>
                     </div>
                     <div class="claim-btn-row">
                         <button class="claim-btn">View Claim Request</button>
@@ -135,7 +123,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 </div>
             `;
 
-            card.querySelector(".claim-btn").addEventListener("click", () => openModal(claim, imageUrl));
+            card.querySelector(".claim-btn").addEventListener("click", () => {
+                openModal(claim, imageUrl);
+            });
+
             itemsContainer.appendChild(card);
         });
     }
@@ -148,7 +139,7 @@ document.addEventListener("DOMContentLoaded", () => {
             name:     document.getElementById("filterName").value.trim().toLowerCase(),
             item:     document.getElementById("filterItem").value.trim().toLowerCase(),
             location: document.getElementById("filterLocation").value.trim().toLowerCase(),
-            date:     document.getElementById("filterDate").value, // YYYY-MM-DD
+            date:     document.getElementById("filterDate").value,
         };
     }
 
@@ -156,21 +147,30 @@ document.addEventListener("DOMContentLoaded", () => {
         const f = getFilterValues();
 
         const filtered = allLoadedClaims.filter(claim => {
-            const name     = (claim["Full Name"]     || '').toLowerCase();
+            const fullName = (claim["Full Name"]     || '').toLowerCase();
             const itemName = (claim["Item Name"]     || '').toLowerCase();
-            const status   = (claim["Status"]        || '').toLowerCase();
+            const status   = (claim["Status"]        || 'pending').toLowerCase();
             const location = (claim["Location Lost"] || '').toLowerCase();
-            const dateLost = toISODate(claim["Date Lost"]);
+            const dateLost = (claim["Date Lost"]     || '');
             const desc     = (claim["Description"]   || '').toLowerCase();
 
-            // Global search bar — checks name, item, description, location
-            if (f.search && !name.includes(f.search) && !itemName.includes(f.search) && !desc.includes(f.search) && !location.includes(f.search)) return false;
+            // Global search bar — matches name, item, location, description
+            if (f.search && !fullName.includes(f.search) && !itemName.includes(f.search) && !location.includes(f.search) && !desc.includes(f.search)) return false;
 
-            if (f.status   && !status.includes(f.status))     return false;
-            if (f.name     && !name.includes(f.name))         return false;
-            if (f.item     && !itemName.includes(f.item))     return false;
+            // Status dropdown
+            if (f.status && !status.includes(f.status)) return false;
+
+            // Full Name text input
+            if (f.name && !fullName.includes(f.name)) return false;
+
+            // Item Name text input
+            if (f.item && !itemName.includes(f.item)) return false;
+
+            // Location text input
             if (f.location && !location.includes(f.location)) return false;
-            if (f.date     && dateLost !== f.date)            return false;
+
+            // Date Lost
+            if (f.date && !dateLost.startsWith(f.date)) return false;
 
             return true;
         });
@@ -188,7 +188,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // ── CLEAR FILTERS ────────────────────────────────────────────────
     clearFilterBtn.addEventListener("click", () => {
         searchInput.value = '';
-        document.getElementById("filterStatus").selectedIndex = 0;
+        document.getElementById("filterStatus").selectedIndex   = 0;
         document.getElementById("filterName").value     = '';
         document.getElementById("filterItem").value     = '';
         document.getElementById("filterLocation").value = '';
@@ -198,7 +198,7 @@ document.addEventListener("DOMContentLoaded", () => {
         showToast('Filters cleared');
     });
 
-    // ── LIVE SEARCH (when filter panel is closed) ────────────────────
+    // ── SEARCH BAR (live, when filter panel is closed) ───────────────
     searchInput.addEventListener("keyup", () => {
         if (!filterPanel.classList.contains("open")) {
             const value = searchInput.value.toLowerCase();
@@ -207,6 +207,14 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
     });
+
+    // ── TOAST ────────────────────────────────────────────────────────
+    function showToast(msg) {
+        clearTimeout(toastTimer);
+        filterToast.textContent = msg;
+        filterToast.classList.add("show");
+        toastTimer = setTimeout(() => filterToast.classList.remove("show"), 2400);
+    }
 
     // ── MODAL ────────────────────────────────────────────────────────
     function openModal(claim, imageUrl) {
@@ -234,9 +242,11 @@ document.addEventListener("DOMContentLoaded", () => {
         fieldsToShow.forEach(({ label, key }) => {
             const value = claim[key];
             if (!value) return;
+
             const displayValue = key === "Status"
                 ? `<span class="status-badge">${value}</span>`
                 : (key === "Timestamp" || key === "Date Lost") ? formatDate(value) : value;
+
             html += `
                 <div class="modal-row">
                     <span class="label">${label}</span>
@@ -245,7 +255,9 @@ document.addEventListener("DOMContentLoaded", () => {
             `;
         });
 
-        if (!html) html = `<p style="color:#888;">No additional details available.</p>`;
+        if (!html) {
+            html = `<p style="color:#888;">No additional details available.</p>`;
+        }
 
         modalBody.innerHTML = html;
         modal.style.display = "flex";
@@ -260,14 +272,6 @@ document.addEventListener("DOMContentLoaded", () => {
     modalClose.addEventListener("click", closeModal);
     modal.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
     document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
-
-    // ── TOAST ────────────────────────────────────────────────────────
-    function showToast(msg) {
-        clearTimeout(toastTimer);
-        filterToast.textContent = msg;
-        filterToast.classList.add("show");
-        toastTimer = setTimeout(() => filterToast.classList.remove("show"), 2400);
-    }
 
     // ── INIT ─────────────────────────────────────────────────────────
     loadClaims();

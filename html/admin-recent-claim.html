@@ -23,6 +23,7 @@
 
 <div class="main-container">
 
+    <!-- ACTIONS -->
     <div class="action-row">
         <div class="left-actions">
             <button id="reportLostBtn" class="primary-btn">Report Lost Item</button>
@@ -38,11 +39,67 @@
         </div>
     </div>
 
+    <!-- ✅ FILTER PANEL (REQUIRED FOR YOUR JS) -->
+    <div class="filter-panel" id="filterPanel">
+        <div class="filter-panel-inner">
+
+            <div class="filter-grid">
+
+                <!-- STATUS -->
+                <div class="filter-field">
+                    <label for="filterStatus">Status</label>
+                    <select id="filterStatus">
+                        <option value="">All Status</option>
+                        <option>Pending</option>
+                        <option>Approved</option>
+                        <option>Rejected</option>
+                    </select>
+                </div>
+
+                <!-- FULL NAME -->
+                <div class="filter-field">
+                    <label for="filterName">Full Name</label>
+                    <input type="text" id="filterName" placeholder="Enter name…">
+                </div>
+
+                <!-- ITEM NAME -->
+                <div class="filter-field">
+                    <label for="filterItem">Item Name</label>
+                    <input type="text" id="filterItem" placeholder="Enter item…">
+                </div>
+
+                <!-- LOCATION -->
+                <div class="filter-field">
+                    <label for="filterLocation">Location</label>
+                    <input type="text" id="filterLocation" placeholder="Enter location…">
+                </div>
+
+                <!-- DATE -->
+                <div class="filter-field">
+                    <label for="filterDate">Date Lost</label>
+                    <input type="date" id="filterDate">
+                </div>
+
+            </div>
+
+            <!-- ACTION BUTTONS -->
+            <div class="filter-actions">
+                <button class="btn-apply" id="applyFilterBtn">Apply Filter</button>
+                <button class="btn-clear" id="clearFilterBtn">Clear</button>
+            </div>
+
+        </div>
+    </div>
+
     <h2 class="section-title">Recent Claim Request</h2>
 
+    <!-- ITEMS -->
     <div id="itemsContainer"></div>
 
 </div>
+
+<!-- ✅ TOAST (REQUIRED) -->
+<div class="filter-toast" id="filterToast"></div>
 
 <!-- MODAL -->
 <div id="claimModal" class="modal-overlay" style="display:none;">
@@ -60,6 +117,6 @@
     </div>
 </div>
 
-<script src="../js/recent-claim.js"></script>
+<script src="../js/admin-recent-claim.js"></script>
 </body>
 </html>
