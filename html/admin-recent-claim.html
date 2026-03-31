@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>FINDME | Recent Claims</title>
-    <link rel="stylesheet" href="../css/recent-claim.css">
+    <link rel="stylesheet" href="../css/admin-claim-request.css">
 </head>
 <body>
 
@@ -23,10 +23,9 @@
 
 <div class="main-container">
 
-    <!-- ACTIONS -->
     <div class="action-row">
         <div class="left-actions">
-            <button id="reportLostBtn" class="primary-btn">Report Lost Item</button>
+            <button id="reportLostBtn" class="primary-btn">Lost Item Reports</button>
             <button id="reportFoundBtn" class="primary-btn">Report Found Item</button>
         </div>
 
@@ -39,42 +38,40 @@
         </div>
     </div>
 
-    <!-- ✅ FILTER PANEL (REQUIRED FOR YOUR JS) -->
+    <!-- FILTER PANEL -->
     <div class="filter-panel" id="filterPanel">
         <div class="filter-panel-inner">
 
             <div class="filter-grid">
 
-                <!-- STATUS -->
                 <div class="filter-field">
                     <label for="filterStatus">Status</label>
-                    <select id="filterStatus">
-                        <option value="">All Status</option>
-                        <option>Pending</option>
-                        <option>Approved</option>
-                        <option>Rejected</option>
-                    </select>
+                    <div class="select-wrap">
+                        <select id="filterStatus">
+                            <option value="">All Statuses</option>
+                            <option>Pending</option>
+                            <option>Approved</option>
+                            <option>Rejected</option>
+                        </select>
+                        <span class="select-arrow"></span>
+                    </div>
                 </div>
 
-                <!-- FULL NAME -->
                 <div class="filter-field">
                     <label for="filterName">Full Name</label>
-                    <input type="text" id="filterName" placeholder="Enter name…">
+                    <input type="text" id="filterName" placeholder="Type name…">
                 </div>
 
-                <!-- ITEM NAME -->
                 <div class="filter-field">
                     <label for="filterItem">Item Name</label>
-                    <input type="text" id="filterItem" placeholder="Enter item…">
+                    <input type="text" id="filterItem" placeholder="Type item…">
                 </div>
 
-                <!-- LOCATION -->
                 <div class="filter-field">
-                    <label for="filterLocation">Location</label>
-                    <input type="text" id="filterLocation" placeholder="Enter location…">
+                    <label for="filterLocation">Location Lost</label>
+                    <input type="text" id="filterLocation" placeholder="Type location…">
                 </div>
 
-                <!-- DATE -->
                 <div class="filter-field">
                     <label for="filterDate">Date Lost</label>
                     <input type="date" id="filterDate">
@@ -82,7 +79,6 @@
 
             </div>
 
-            <!-- ACTION BUTTONS -->
             <div class="filter-actions">
                 <button class="btn-apply" id="applyFilterBtn">Apply Filter</button>
                 <button class="btn-clear" id="clearFilterBtn">Clear</button>
@@ -93,13 +89,9 @@
 
     <h2 class="section-title">Recent Claim Request</h2>
 
-    <!-- ITEMS -->
     <div id="itemsContainer"></div>
 
 </div>
-
-<!-- ✅ TOAST (REQUIRED) -->
-<div class="filter-toast" id="filterToast"></div>
 
 <!-- MODAL -->
 <div id="claimModal" class="modal-overlay" style="display:none;">
@@ -117,6 +109,9 @@
     </div>
 </div>
 
-<script src="../js/admin-recent-claim.js"></script>
+<!-- TOAST -->
+<div class="filter-toast" id="filterToast"></div>
+
+<script src="../js/admin-claim-request.js"></script>
 </body>
 </html>
