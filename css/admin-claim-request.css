@@ -438,6 +438,43 @@ body {
     color: #0A1C3A;
 }
 
+/* ── MODAL ACTION ROW ─────────────────────────────────────────────── */
+.modal-action-row {
+    display: flex;
+    gap: 16px;
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 2px solid #0A1C3A;
+}
+
+.modal-accept-btn,
+.modal-home-btn {
+    flex: 1;
+    padding: 13px 0;
+    font-family: 'Georgia', serif;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border: 2px solid #0A1C3A;
+    background: white;
+    color: #0A1C3A;
+    text-decoration: underline;
+    letter-spacing: 0.03em;
+    transition: background 0.25s, color 0.25s;
+}
+
+.modal-accept-btn:hover:not(:disabled),
+.modal-home-btn:hover {
+    background: #0A1C3A;
+    color: white;
+}
+
+.modal-accept-btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    text-decoration: none;
+}
+
 /* ── PRINT ────────────────────────────────────────────────────────── */
 @media print {
     .navbar {

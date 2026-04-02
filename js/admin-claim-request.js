@@ -12,7 +12,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const modalImage = document.getElementById("modalImage");
     const modalBody  = document.getElementById("modalBody");
 
-    // Filter panel elements
     const filterPanel    = document.getElementById("filterPanel");
     const applyFilterBtn = document.getElementById("applyFilterBtn");
     const clearFilterBtn = document.getElementById("clearFilterBtn");
@@ -20,7 +19,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const CLAIM_URL = "https://script.google.com/macros/s/AKfycbztV_dRX9yMCD5-_rHMlEHFfcumogCBqJRknvihNNOf9_7OUGb0juFu8s1QG-uJ4P2pVg/exec";
 
-    // Store all loaded claims for re-filtering
     let allLoadedClaims = [];
     let toastTimer;
 
@@ -63,7 +61,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Normalise a date string to YYYY-MM-DD for comparison with <input type="date">
     function toISODate(raw) {
         if (!raw) return "";
         try {
@@ -86,10 +83,8 @@ document.addEventListener("DOMContentLoaded", () => {
         try {
             const claims = await fetchClaims();
             claims.sort((a, b) => new Date(b.Timestamp) - new Date(a.Timestamp));
-
             allLoadedClaims = claims;
             renderCards(allLoadedClaims);
-
         } catch (error) {
             console.error("Error fetching claim data:", error);
             itemsContainer.innerHTML = `<p class="empty-state">Failed to load claim requests. Please try again later.</p>`;
@@ -148,7 +143,7 @@ document.addEventListener("DOMContentLoaded", () => {
             name:     document.getElementById("filterName").value.trim().toLowerCase(),
             item:     document.getElementById("filterItem").value.trim().toLowerCase(),
             location: document.getElementById("filterLocation").value.trim().toLowerCase(),
-            date:     document.getElementById("filterDate").value, // YYYY-MM-DD
+            date:     document.getElementById("filterDate").value,
         };
     }
 
@@ -163,9 +158,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const dateLost = toISODate(claim["Date Lost"]);
             const desc     = (claim["Description"]   || '').toLowerCase();
 
-            // Global search bar — checks name, item, description, location
             if (f.search && !name.includes(f.search) && !itemName.includes(f.search) && !desc.includes(f.search) && !location.includes(f.search)) return false;
-
             if (f.status   && !status.includes(f.status))     return false;
             if (f.name     && !name.includes(f.name))         return false;
             if (f.item     && !itemName.includes(f.item))     return false;
@@ -198,7 +191,7 @@ document.addEventListener("DOMContentLoaded", () => {
         showToast('Filters cleared');
     });
 
-    // ── LIVE SEARCH (when filter panel is closed) ────────────────────
+    // ── LIVE SEARCH ──────────────────────────────────────────────────
     searchInput.addEventListener("keyup", () => {
         if (!filterPanel.classList.contains("open")) {
             const value = searchInput.value.toLowerCase();
@@ -246,12 +239,91 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         if (!html) html = `<p style="color:#888;">No additional details available.</p>`;
-
         modalBody.innerHTML = html;
+
+        // ── Accept button ────────────────────────────────────────────
+        const acceptBtn = document.getElementById("modalAcceptBtn");
+        const alreadyApproved = (claim["Status"] || "").toLowerCase() === "approved";
+
+        const freshAccept = acceptBtn.cloneNode(true);
+        acceptBtn.replaceWith(freshAccept);
+        freshAccept.disabled    = alreadyApproved;
+        freshAccept.textContent = alreadyApproved ? "Already Approved" : "Accept Request";
+        freshAccept.addEventListener("click", () => acceptClaim(claim, freshAccept));
+
+        // ── Home button ──────────────────────────────────────────────
+        const homeBtn   = document.getElementById("modalHomeBtn");
+        const freshHome = homeBtn.cloneNode(true);
+        homeBtn.replaceWith(freshHome);
+        freshHome.addEventListener("click", () => window.location.href = "admin-home.html");
+
         modal.style.display = "flex";
         document.body.style.overflow = "hidden";
     }
 
+    // ── ACCEPT CLAIM ─────────────────────────────────────────────────
+    // Uses URLSearchParams (no Content-Type: application/json header)
+    // This avoids the CORS preflight that blocks requests from localhost
+    async function acceptClaim(claim, btn) {
+        const confirmed = confirm(`Approve the claim request for "${claim["Full Name"]}"?\n\nThis will mark the status as Approved.`);
+        if (!confirmed) return;
+
+        btn.disabled    = true;
+        btn.textContent = "Processing…";
+        btn.style.textDecoration = "none";
+
+        try {
+            const res = await fetch(CLAIM_URL, {
+                method: "POST",
+                body: new URLSearchParams({
+                    action:    "updateStatus",
+                    timestamp: claim["Timestamp"],
+                    status:    "Approved"
+                })
+            });
+
+            const rawText = await res.text();
+
+            let result;
+            try {
+                result = JSON.parse(rawText);
+            } catch (_) {
+                console.error("Non-JSON response:", rawText);
+                showToast("❌ Unexpected server response.");
+                btn.disabled    = false;
+                btn.textContent = "Accept Request";
+                btn.style.textDecoration = "underline";
+                return;
+            }
+
+            if (result.success) {
+                claim["Status"] = "Approved";
+
+                const statusBadge = modalBody.querySelector(".status-badge");
+                if (statusBadge) statusBadge.textContent = "Approved";
+
+                btn.textContent = "Already Approved";
+                showToast("✅ Claim approved successfully!");
+                renderCards(allLoadedClaims);
+            } else {
+                const msg = result.message || result.error || "Unknown server error.";
+                console.error("Server error:", msg);
+                showToast("❌ " + msg);
+                btn.disabled    = false;
+                btn.textContent = "Accept Request";
+                btn.style.textDecoration = "underline";
+            }
+
+        } catch (err) {
+            console.error("Network error:", err);
+            showToast("❌ Network error. Check your connection.");
+            btn.disabled    = false;
+            btn.textContent = "Accept Request";
+            btn.style.textDecoration = "underline";
+        }
+    }
+
+    // ── CLOSE MODAL ──────────────────────────────────────────────────
     function closeModal() {
         modal.style.display = "none";
         document.body.style.overflow = "";

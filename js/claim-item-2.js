@@ -5,34 +5,43 @@ document.addEventListener("DOMContentLoaded", () => {
     const submitBtn = document.getElementById("submitBtn");
     const homeNavBtn = document.getElementById("homeNavBtn");
 
-    // ==============================
-    // NAVIGATION
-    // ==============================
+    // ── NAVIGATION ──
     homeNavBtn.addEventListener("click", () => {
         window.location.href = "home.html";
     });
 
-    // ==============================
-    // SUBMIT CLAIM
-    // ==============================
+    // ── SUBMIT CLAIM ──
     submitBtn.addEventListener("click", async () => {
 
         const description = document.getElementById("itemDescription").value.trim();
-        const fileInput = document.getElementById("proofUpload");
-        const lostDate = document.getElementById("lostDate").value;
-        const lastLocation = document.getElementById("lastLocation").value.trim();
+        const fileInput   = document.getElementById("proofUpload");
+        const lostDate    = document.getElementById("lostDate").value;
+        const lastLocation= document.getElementById("lastLocation").value.trim();
 
-        // Basic validation
         if (!description || !fileInput.files[0] || !lostDate || !lastLocation) {
-            alert("Please complete all required fields before submitting.");
+            alert("Please complete all required fields.");
             return;
         }
 
-        // Retrieve stored data from Page 1
-        const storedData = JSON.parse(sessionStorage.getItem("claimData"));
+        // Retrieve session data from Page 1
+        let storedData;
+        try {
+            storedData = JSON.parse(sessionStorage.getItem("claimData"));
+        } catch {
+            alert("Session data corrupted. Please restart the claim process.");
+            window.location.href = "claim-item-1.html";
+            return;
+        }
 
         if (!storedData) {
-            alert("Claim data missing. Please restart the claim process.");
+            alert("Missing claim data. Please restart the claim process.");
+            window.location.href = "claim-item-1.html";
+            return;
+        }
+
+        const { fullName, idNumber, email, contact, itemName, itemId } = storedData;
+        if (!fullName || !idNumber || !email || !contact) {
+            alert("Personal details missing. Please restart the claim process.");
             window.location.href = "claim-item-1.html";
             return;
         }
@@ -43,55 +52,57 @@ document.addEventListener("DOMContentLoaded", () => {
             submitBtn.disabled = true;
             submitBtn.textContent = "Submitting...";
 
+            // Convert file to Base64
             const base64 = await toBase64(file);
 
-            const payload = {
-                fullName: storedData.fullName,
-                idNumber: storedData.idNumber,
-                email: storedData.email,
-                contact: storedData.contact,
-                description,
-                lostDate,
-                lastLocation,
-                fileName: file.name,
-                fileType: file.type,
-                fileData: base64.split(',')[1]
-            };
+            // Use URLSearchParams to avoid CORS preflight
+            const formData = new URLSearchParams();
+            formData.append("fullName", fullName);
+            formData.append("idNumber", idNumber);
+            formData.append("email", email);
+            formData.append("contact", contact);
+            formData.append("itemName", itemName);
+            formData.append("itemId", itemId);
+            formData.append("description", description);
+            formData.append("lostDate", lostDate);
+            formData.append("lastLocation", lastLocation);
+            formData.append("fileName", file.name);
+            formData.append("fileType", file.type);
+            formData.append("fileData", base64.split(',')[1]); // Only raw Base64
+
+            console.log("Submitting payload:", Object.fromEntries(formData));
 
             const response = await fetch(API_URL, {
                 method: "POST",
-                body: JSON.stringify(payload)
+                body: formData
             });
 
             const result = await response.json();
 
             if (result.success) {
-                alert("Claim request submitted successfully!");
+                alert("Claim submitted successfully!");
                 sessionStorage.removeItem("claimData");
                 window.location.href = "home.html";
             } else {
-                alert("Submission failed: " + result.error);
-                submitBtn.disabled = false;
-                submitBtn.textContent = "SUBMIT CLAIM REQUEST";
+                throw new Error(result.error || "Unknown error from server");
             }
 
         } catch (error) {
             console.error("Submission error:", error);
-            alert("An error occurred while submitting your claim.");
+            alert("Submission failed: " + error.message);
             submitBtn.disabled = false;
             submitBtn.textContent = "SUBMIT CLAIM REQUEST";
         }
+
     });
 });
 
-// ==============================
-// Convert file to Base64
-// ==============================
+// ── HELPER: Convert file to Base64 ──
 function toBase64(file) {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onload = () => resolve(reader.result);
-        reader.onerror = error => reject(error);
+        reader.onerror = reject;
     });
 }
