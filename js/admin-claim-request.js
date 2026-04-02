@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const filterBtn      = document.getElementById("filterBtn");
     const searchInput    = document.getElementById("searchInput");
     const itemsContainer = document.getElementById("itemsContainer");
+    const homeBtn = document.getElementById("homeBtn");
 
     const modal      = document.getElementById("claimModal");
     const modalClose = document.getElementById("modalClose");
@@ -26,6 +27,8 @@ document.addEventListener("DOMContentLoaded", () => {
     reportLostBtn.addEventListener("click",  () => window.location.href = "admin-recent-lost.html");
     reportFoundBtn.addEventListener("click", () => window.location.href = "admin-recent-found.html");
     profileBtn.addEventListener("click",     () => window.location.href = "admin-profile.html");
+    homeBtn.addEventListener("click", () => window.location.href = "admin-home.html");
+
 
     // ── FILTER PANEL TOGGLE ─────────────────────────────────────────
     filterBtn.addEventListener("click", () => {
