@@ -124,7 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     reportedBy:   item.reportedBy   || '',
                     imageUrl:     item.imageUrl     || ''
                 });
-                window.location.href = `recent-items.html?${params.toString()}`;
+                window.location.href = `admin-recent-items.html?${params.toString()}`;
             });
 
             itemsContainer.appendChild(card);

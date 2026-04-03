@@ -4,29 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Find Me | Home</title>
-
-    <!-- Global / Universal Styles -->
     <link rel="stylesheet" href="../css/navbar.css">
     <link rel="stylesheet" href="../css/landing-page.css">
 </head>
 <body>
 
-    <!-- UNIVERSAL NAVBAR -->
     <header id="navbar-container"></header>
 
-    <!-- PAGE CONTENT -->
     <main class="main-layout">
-        <!-- LEFT SECTION -->
         <section class="left-panel">
             <div class="logo">
-            <img src="../assets/images/logo.jpg" alt="Find Me Logo">
+                <img src="../assets/images/logo.jpg" alt="Find Me Logo">
             </div>
             <button id="signinBtn" class="signin-btn">SIGN IN</button>
         </section>
 
-        <!-- RIGHT SECTION -->
         <section class="right-panel">
-            <h2>How to use Find Me</h2>
+            <h2>How to use Find Me:</h2>
             <p>
                 Users can use FindMe by first signing in or creating an account
                 using their school email and student information. After logging
@@ -43,16 +37,15 @@
         </section>
     </main>
 
-    <!-- SCRIPTS -->
     <script src="../js/navbar.js"></script>
     <script src="../js/landing-page.js"></script>
 
-    <!-- LOAD NAVBAR COMPONENT -->
     <script>
         fetch("../html/navbar.html")
             .then(response => response.text())
             .then(html => {
                 document.getElementById("navbar-container").innerHTML = html;
+                initNavbar(); // run AFTER navbar is injected into the DOM
             });
     </script>
 
